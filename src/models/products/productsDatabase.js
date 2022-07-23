@@ -3,11 +3,23 @@ import mongoose from "mongoose";
 const productsSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+  },
+  productClass: {
+    type: String,
+    required: true,
+  },
+  productSubclass: {
+    type: String,
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: false,
   },
   images: {
     type: [String],
@@ -15,21 +27,20 @@ const productsSchema = new mongoose.Schema({
   },
   description: {
     type: [String],
-    required: false
+    required: false,
   },
   published: {
     type: Boolean,
-    required: true
+    required: true,
   },
   purchasePrice: {
     type: Number,
-    required: false
+    required: false,
   },
   dateCreated: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
+});
 
-})
-
-export default mongoose.model('Products', productsSchema)
+export default mongoose.model("Products", productsSchema);
