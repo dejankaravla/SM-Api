@@ -50,6 +50,8 @@ export const httpPatchProductClassById = async (req, res) => {
     });
   }
 
+  productClass.dateModified = new Date();
+
   await pathcProductClassById(productClass);
   return res.status(200).json(`${productClass.name.label} is successfully updated.`);
 };

@@ -82,7 +82,6 @@ export const httpPatchProduct = async (req, res) => {
   const product = req.body;
   const files = req.files;
   const images = [];
-  console.log(product);
 
   const imagePath = path.join(__dirname, "../../../public/productImages");
   const fileUpload = new Resize(imagePath);
@@ -94,6 +93,7 @@ export const httpPatchProduct = async (req, res) => {
   }
 
   product.images = [...images];
+  product.dateModified = new Date();
 
   if (!product.name || !product.price || !product.productClass || !product.productSubclass) {
     return res.status(400).json({
@@ -110,5 +110,5 @@ export const httpPatchProduct = async (req, res) => {
   }
 
   await pathcProduct(product);
-  return res.status(200).json(`${product.name} modified.`);
+  return res.status(200).json(`${product.name} modified`);
 };

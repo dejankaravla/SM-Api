@@ -41,6 +41,10 @@ const productsSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  dateModified: {
+    type: Date,
+    required: false,
+  },
 });
 
 export default mongoose.model("Products", productsSchema);
