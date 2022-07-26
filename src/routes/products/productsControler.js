@@ -82,17 +82,21 @@ export const httpPatchProduct = async (req, res) => {
   const product = req.body;
   const files = req.files;
   const images = [];
+  if (files.length > 0) {
+    const imagePath = path.join(__dirname, "../../../public/productImages");
+    const fileUpload = new Resize(imagePath);
 
-  const imagePath = path.join(__dirname, "../../../public/productImages");
-  const fileUpload = new Resize(imagePath);
+    for (let index = 0; index < files.length; index++) {
+      const fileName = await fileUpload.save(files[index].buffer);
 
-  for (let index = 0; index < files.length; index++) {
-    const fileName = await fileUpload.save(files[index].buffer);
+      images.push(fileName);
+    }
 
-    images.push(fileName);
+    product.images = [...images];
+  } else {
+    product.images = product.images.split(',')
   }
 
-  product.images = [...images];
   product.dateModified = new Date();
 
   if (!product.name || !product.price || !product.productClass || !product.productSubclass) {
@@ -108,7 +112,6 @@ export const httpPatchProduct = async (req, res) => {
       error: "Proizvod sa istim nazivom vec postoji",
     });
   }
-
   await pathcProduct(product);
   return res.status(200).json(`${product.name} modified`);
 };
