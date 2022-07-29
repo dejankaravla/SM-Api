@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const clientsSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: true,
   },
@@ -9,12 +9,12 @@ const clientsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true
+  },
   clientType: {
     type: String,
-    required: true,
-  },
-  dateCreated: {
-    type: Date,
     required: true,
   },
   address: {
@@ -28,6 +28,10 @@ const clientsSchema = new mongoose.Schema({
   mobile: {
     type: String,
     required: false,
+  },
+  dateCreated: {
+    type: Date,
+    required: true,
   },
   dateModified: {
     type: Date,

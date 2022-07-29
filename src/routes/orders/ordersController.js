@@ -1,4 +1,4 @@
-import { pushOrder, getOrders, deleteOrder } from "../../models/orders/ordersModel.js";
+import { pushOrder, getOrders, deleteOrder, findOrder } from "../../models/orders/ordersModel.js";
 
 export const httpGetAllOrders = async (req, res) => {
   const orders = await getOrders();
@@ -7,20 +7,15 @@ export const httpGetAllOrders = async (req, res) => {
 
 export const httpPushOrder = async (req, res) => {
   const order = req.body;
-
-  if (!order.client || !order.clientType || order.products.length === 0 || !order.orderPrice) {
-    return res.status(400).json({
-      error: "Missing required product data",
-    });
+  order.dateCreated = new Date
+  order.orderNumber = (await getOrders()).length + 1
+  try {
+    await pushOrder(order)
+    res.status(200).json('Order Created')
+  } catch (error) {
+    console.log(error.errors);
+    res.status(400).json(error)
   }
-
-  if (!order.orderStatus) {
-    order.orderStatus = "Poruceno";
-  }
-
-  order.dateCreated = new Date();
-  await pushOrder(order);
-  return res.status(200).json(order);
 };
 
 export const httpDeleteOrder = async (req, res) => {

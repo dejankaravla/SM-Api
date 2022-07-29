@@ -1,17 +1,33 @@
 import mongoose from "mongoose";
 
 const ordersSchema = new mongoose.Schema({
+  orderNumber: {
+    type: Number,
+    required: true
+  },
   client: {
     type: String,
-    required: true,
+    required: [true, 'Clients Name is missing'],
+  },
+  clientID: {
+    type: String,
+    requrid: [true, 'Client ID is missing']
+  },
+  createdBy: {
+    type: String,
+    required: [true, 'Creators Name is missing']
   },
   clientType: {
     type: String,
-    required: true,
+    required: [true, 'Clients Type is missing'],
   },
   dateCreated: {
     type: Date,
-    required: true,
+    required: [true, 'Created Date is missing'],
+  },
+  dateModified: {
+    type: Date,
+    required: false,
   },
   address: {
     type: String,
@@ -27,24 +43,59 @@ const ordersSchema = new mongoose.Schema({
   },
   orderStatus: {
     type: String,
-    required: true,
+    required: [true, 'Order Status is missing'],
   },
   products: {
     type: [
       {
-        name: String,
-        quantity: Number,
-        images: [String],
-        price: Number,
-        totalPrice: Number,
+        name: {
+          type: String,
+          required: [true, 'Product Name is missing']
+        },
+        quantity: {
+          type: Number,
+          required: [true, 'Quantity is missing']
+        },
+        images: {
+          type: [String],
+          required: false
+        },
+        price: {
+          type: 'Number',
+          required: [true, 'Product Price is missing']
+        },
+        purchasePrice: {
+          type: 'Number',
+          required: [true, 'Product Purchase Price is missing']
+        },
+        balance: {
+          type: Number,
+          required: [true, 'Product Balance is missing']
+        },
+        totalPrice: {
+          type: 'Number',
+          required: [true, 'Product Total Price is missing']
+        },
       },
     ],
-    required: true,
+    required: [true, 'Products are missing'],
   },
   orderPrice: {
     type: Number,
-    required: true,
+    required: [true, 'Order Price is missing'],
   },
+  totalPurchasePrice: {
+    type: Number,
+    requrid: [true, 'Order Purchase Price is missing']
+  },
+  paid: {
+    type: Boolean,
+    required: [true, 'Paid Status is missing']
+  },
+  balance: {
+    type: Number,
+    required: [true, 'Order Balance is missing']
+  }
 });
 
 export default mongoose.model("Orders", ordersSchema);

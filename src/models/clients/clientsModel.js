@@ -8,8 +8,8 @@ export const findClientById = async (id) => {
   return await clientsDatabase.findOne({ _id: id });
 };
 
-export const findClientByName = async (name) => {
-  return await clientsDatabase.findOne(name);
+export const findClient = async (data) => {
+  return await clientsDatabase.findOne(data);
 };
 
 export const pushClient = async (client) => {

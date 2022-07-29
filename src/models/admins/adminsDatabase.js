@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const adminsSchema = new mongoose.Schema({
   userName: {
     type: String,
-    required: true,
+    required: [true, 'Wrong Username'],
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Wrong Password'],
   },
 });
 

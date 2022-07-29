@@ -1,8 +1,6 @@
 import { findAdmin } from "../../models/admins/adminsModel.js";
 import bcrypt from 'bcrypt'
 
-
-
 export const httpFindAdmin = async (req, res) => {
   const admin = req.query;
 

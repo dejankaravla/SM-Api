@@ -1,31 +1,17 @@
 import ordersDatabase from "./ordersDatabase.js";
 
-export const findOrder = async (id) => {
-  return await ordersDatabase.findOne(id);
+export const findOrder = async (data) => {
+  return await ordersDatabase.findOne(data);
 };
 
 export const pushOrder = async (order) => {
-  try {
-    await ordersDatabase.updateOne(
-      {
-        ...order,
-      },
-      {
-        ...order,
-      },
-      { upsert: true }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  await ordersDatabase.insertMany(order);
 };
 
 export const getOrders = async () => {
-  return await ordersDatabase.find({});
+  return await ordersDatabase.find();
 };
 
-export const deleteOrder = async () => {
-  return await ordersDatabase.deleteOne({
-    _id: id,
-  });
+export const deleteOrder = async (data) => {
+  return await ordersDatabase.deleteOne(data);
 };
