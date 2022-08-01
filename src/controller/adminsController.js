@@ -4,6 +4,8 @@ import adminsDatabase from "../models/adminsDatabase.js";
 export const httpFindAdmin = async (req, res) => {
   const admin = req.query;
 
+  console.log('login Prosao');
+
   if (!admin.userName) {
     return res.status(400).json({
       error: "Username is missing",
@@ -45,10 +47,10 @@ export const httpFindAdmin = async (req, res) => {
 
 // const createAdmin = async () => {
 //   const admin = {
-//     userName: "sasamorar",
-//     name: "Sale",
+//     userName: "dejankaravla",
+//     name: "Dejan",
 //     type: "Admin",
-//     password: "stasadaca",
+//     password: "aleksamarija",
 //   };
 //   const newPassword = await bcrypt.genSalt().then((salt) => {
 //     return bcrypt.hash(admin.password, salt).then((hash) => {

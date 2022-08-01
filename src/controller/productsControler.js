@@ -79,8 +79,8 @@ export const httpPatchProduct = async (req, res) => {
   const product = req.body;
   const files = req.files;
   const images = [];
-  if (files.length > 0) {
-    const imagePath = path.join(__dirname, "../../../public/productImages");
+  if (files && files.length > 0) {
+    const imagePath = path.join(__dirname, "../../public/productImages");
     const fileUpload = new Resize(imagePath);
 
     for (let index = 0; index < files.length; index++) {
@@ -90,25 +90,22 @@ export const httpPatchProduct = async (req, res) => {
     }
 
     product.images = [...images];
-  } else {
+  } else if (product.images && product.images.length > 0) {
     product.images = product.images.split(",");
   }
 
   product.dateModified = new Date();
 
-  if (!product.name || !product.price || !product.category || !product.subcategory) {
-    return res.status(400).json({
-      error: "Missing required product data",
-    });
+  if (product.name) {
+    const productFromDB = await productsDatabase.findOne({ name: product.name });
+
+    if (productFromDB && productFromDB._id && productFromDB._id.toString() !== product._id) {
+      return res.status(400).json({
+        error: "Proizvod sa istim nazivom vec postoji",
+      });
+    }
   }
 
-  const productFromDB = await productsDatabase.findOne({ name: product.name });
-
-  if (productFromDB && productFromDB._id && productFromDB._id.toString() !== product._id) {
-    return res.status(400).json({
-      error: "Proizvod sa istim nazivom vec postoji",
-    });
-  }
   await productsDatabase.findOneAndUpdate(
     {
       _id: product._id,
@@ -117,5 +114,5 @@ export const httpPatchProduct = async (req, res) => {
       ...product,
     }
   );
-  return res.status(200).json(`${product.name} modified`);
+  return res.status(200).json(`Product modified`);
 };
