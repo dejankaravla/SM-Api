@@ -6,7 +6,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: ["https://dashboardsmmobile.web.app/", "http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://dashboardsmmobile.web.app/"],
   })
 );
 
