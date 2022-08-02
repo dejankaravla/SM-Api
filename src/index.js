@@ -3,9 +3,10 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 import { app } from './app.js'
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 80;
 
-const MONGO_URL = process.env.MONGO_URL
+
+const MONGO_URL = "mongodb://localhost:27017/SM"
 
 const server = http.createServer(app)
 

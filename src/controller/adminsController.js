@@ -4,8 +4,6 @@ import adminsDatabase from "../models/adminsDatabase.js";
 export const httpFindAdmin = async (req, res) => {
   const admin = req.query;
 
-  console.log('login Prosao');
-
   if (!admin.userName) {
     return res.status(400).json({
       error: "Username is missing",
@@ -37,7 +35,6 @@ export const httpFindAdmin = async (req, res) => {
       error: "Wrong Password",
     });
   } else {
-    console.log(adminDB);
     return res.status(200).json({
       _id: adminDB._id,
       admin: adminDB.name,
