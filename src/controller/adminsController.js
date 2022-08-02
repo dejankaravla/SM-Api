@@ -42,21 +42,21 @@ export const httpFindAdmin = async (req, res) => {
   }
 };
 
-// const createAdmin = async () => {
-//   const admin = {
-//     userName: "dejankaravla",
-//     name: "Dejan",
-//     type: "Admin",
-//     password: "aleksamarija",
-//   };
-//   const newPassword = await bcrypt.genSalt().then((salt) => {
-//     return bcrypt.hash(admin.password, salt).then((hash) => {
-//       return hash;
-//     });
-//   });
+const createAdmin = async () => {
+  const admin = {
+    userName: "dejankaravla",
+    name: "Dejan",
+    type: "Admin",
+    password: "aleksamarija",
+  };
+  const newPassword = await bcrypt.genSalt().then((salt) => {
+    return bcrypt.hash(admin.password, salt).then((hash) => {
+      return hash;
+    });
+  });
 
-//   admin.password = newPassword;
-//   await adminsDatabase.create(admin);
-// };
+  admin.password = newPassword;
+  await adminsDatabase.create(admin);
+};
 
-// createAdmin();
+createAdmin();
