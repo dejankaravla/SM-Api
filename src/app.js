@@ -6,9 +6,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: "https://dashboardsmmobile.web.app/",
-    preflightContinue: false,
-    credentials: true,
+    origin: "*",
   })
 );
 
