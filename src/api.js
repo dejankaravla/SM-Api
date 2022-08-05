@@ -4,9 +4,11 @@ import { clientsRouter } from "./routes/clientsRouter.js";
 import { ordersRouter } from "./routes/ordersRouter.js";
 import { categoriesRouter } from "./routes/categoriesRouter.js";
 import { adminRouter } from "./routes/adminsRouter.js";
+import { authRouter } from "./routes/isAuthRouter.js";
 
 const api = express.Router();
 
+api.use('/isUserAuth', authRouter)
 api.use("/", adminRouter);
 api.use("/products", productRouter);
 api.use("/clients", clientsRouter);
