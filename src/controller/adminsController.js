@@ -3,17 +3,18 @@ import adminsDatabase from "../models/adminsDatabase.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-
 const setAccesToken = (_id) => {
-  const accessToken = jwt.sign({
-    id: _id,
-  }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: '1h'
-  })
-  return accessToken
-}
-
-
+  const accessToken = jwt.sign(
+    {
+      id: _id,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+  return accessToken;
+};
 
 export const httpFindAdmin = async (req, res) => {
   const admin = req.query;
@@ -38,8 +39,6 @@ export const httpFindAdmin = async (req, res) => {
     });
   }
 
-
-
   const passwordValidation = await bcrypt.genSalt().then((salt) => {
     return bcrypt.hash(admin.password, salt).then((hash) => {
       return bcrypt.compare(admin.password, adminDB.password).then((result) => result);
@@ -51,12 +50,12 @@ export const httpFindAdmin = async (req, res) => {
       error: "Wrong Password",
     });
   } else {
-    const accessToken = setAccesToken(adminDB._id)
+    const accessToken = setAccesToken(adminDB._id);
 
     return res.status(200).json({
       _id: adminDB._id,
       admin: adminDB.name,
-      accessToken: accessToken
+      accessToken: accessToken,
     });
   }
 };

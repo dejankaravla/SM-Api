@@ -8,7 +8,7 @@ import { authRouter } from "./routes/isAuthRouter.js";
 
 const api = express.Router();
 
-api.use('/isUserAuth', authRouter)
+api.use("/isUserAuth", authRouter);
 api.use("/", adminRouter);
 api.use("/products", productRouter);
 api.use("/clients", clientsRouter);
